@@ -1,5 +1,5 @@
 'use client';
-import { GiftOutlined, UserOutlined } from '@ant-design/icons';
+import { GiftOutlined, UserOutlined, HighlightOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
 import { Menu } from 'antd';
@@ -18,6 +18,11 @@ const items: MenuItem[] = [
         icon: <GiftOutlined />,
         key: 'gift',
         label: '奖品与权益管理',
+    },
+    {
+        icon: <HighlightOutlined />,
+        key: 'declare',
+        label: '自主申报管理',
     },
 ];
 

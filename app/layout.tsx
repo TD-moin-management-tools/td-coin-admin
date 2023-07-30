@@ -2,9 +2,10 @@
 import './globals.css';
 import './clear-antd.css';
 import { Inter } from 'next/font/google';
-import { Breadcrumb, Layout, theme } from 'antd';
+import { Layout, theme } from 'antd';
 import { usePathname } from 'next/navigation';
 import CustomMenu from './components/menu';
+import { useEffect } from 'react';
 
 const { Header, Content, Footer, Sider } = Layout;
 const inter = Inter({ subsets: ['latin'] });

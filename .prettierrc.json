@@ -1,0 +1,17 @@
+{
+    "printWidth": 100,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "quoteProps": "as-needed",
+    "trailingComma": "es5",
+    "bracketSameLine": false,
+    "arrowParens": "avoid",
+    "importOrder": [
+        "<THIRD_PARTY_MODULES>",
+        "^@/(.*)$",
+        "^(\\.|\\.\\.)/?(.*)(?<!(less|scss))$",
+        "^(.*)(less|scss)$"
+    ],
+    "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"]
+}

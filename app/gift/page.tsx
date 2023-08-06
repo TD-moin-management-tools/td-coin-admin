@@ -2,15 +2,18 @@
 import { Table, message, Button } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
 import { getColumns, IDataType } from './config';
+import { useRouter } from 'next/navigation';
+import { objectToQueryString } from '@/app/utils/transform';
+import Link from 'next/link';
 import mockdata from './mock.json';
 
 const Gift = () => {
+    const router = useRouter();
     const [messageApi, contextHolder] = message.useMessage();
 
     const [data, setData] = useState<IDataType[]>([]);
-    // 要修改的的成员信息
-    const [selectedInfo, setSelectedInfo] = useState<IDataType>();
 
+    // TODO：初始化列表
     useEffect(() => {
         setTimeout(() => {
             setData(mockdata);
@@ -18,10 +21,10 @@ const Gift = () => {
     }, []);
 
     const handleModify = (record: IDataType) => {
-        setSelectedInfo(record);
+        const query = objectToQueryString(record);
+        const path = `/gift/update?${query}`;
+        router.push(path);
     };
-
-    const handleCreate = () => {};
 
     const columnsConfig = useMemo(() => {
         return getColumns(handleModify);
@@ -32,9 +35,9 @@ const Gift = () => {
             {contextHolder}
             <div className='text-xl font-bold mb-10'>奖品与权益管理</div>
             <div className='text-right mb-5'>
-                <Button type='primary' onClick={handleCreate}>
-                    新建奖品/权益
-                </Button>
+                <Link href='/gift/update'>
+                    <Button type='primary'>新建奖品/权益</Button>
+                </Link>
             </div>
             <Table columns={columnsConfig} dataSource={data} />
         </div>

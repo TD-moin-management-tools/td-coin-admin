@@ -21,8 +21,8 @@ const GIFT_TYPE = {
 };
 
 const GIFT_STATUS = {
-    1: '可用',
-    2: '结束',
+    1: '进行中',
+    2: '已结束',
 };
 
 export const getColumns = (actionFunc: TActionFunc): ColumnsType<IDataType> => {

@@ -1,0 +1,40 @@
+[
+    {
+        "key": "1",
+        "id": "1",
+        "name": "兑换衣服",
+        "type": 2,
+        "status": 1,
+        "count": 10,
+        "exchange_office": "小岛",
+        "update_stamp": 1690707962380
+    },
+    {
+        "key": "2",
+        "id": "2",
+        "name": "兑换uset",
+        "type": 2,
+        "status": 2,
+        "count": 0,
+        "exchange_office": "luca",
+        "update_stamp": 1690707962380
+    },
+    {
+        "key": "3",
+        "id": "3",
+        "name": "权益A",
+        "type": 1,
+        "status": 1,
+        "exchange_office": "luca",
+        "update_stamp": 1690707962380
+    },
+    {
+        "key": "4",
+        "id": "5",
+        "name": "权益B",
+        "type": 2,
+        "status": 2,
+        "exchange_office": "luca",
+        "update_stamp": 1690707962380
+    }
+]

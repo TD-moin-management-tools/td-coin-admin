@@ -2,6 +2,7 @@
 import { Button, Input, Card, message } from 'antd';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { AppApi } from '@server/app';
 
 const { Password } = Input;
 
@@ -13,24 +14,29 @@ export default function Login() {
     const [userPassword, setUserPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
-    // todo 请求登录信息
     const handleLogin = () => {
         setLoading(true);
 
-        setTimeout(() => {
-            setLoading(false);
-            messageApi.open({
-                type: 'success',
-                content: '登录成功,即将跳转',
+        AppApi.login({ user_name: userName, password: userPassword })
+            .then(() => {
+                messageApi.open({
+                    type: 'success',
+                    content: '登录成功,即将跳转',
+                });
+
+                setTimeout(() => {
+                    router.replace('/user');
+                }, 1000);
+            })
+            .catch(e => {
+                messageApi.open({
+                    type: 'error',
+                    content: '登录失败，请确认用户名和密码',
+                });
+            })
+            .finally(() => {
+                setLoading(false);
             });
-
-            // TODO: 临时做法
-            sessionStorage.setItem('login', 'true');
-
-            setTimeout(() => {
-                router.replace('/user');
-            }, 1000);
-        }, 2000);
     };
 
     return (

@@ -3,19 +3,33 @@ import './globals.css';
 import './clear-antd.css';
 import { Inter } from 'next/font/google';
 import { Layout, theme } from 'antd';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import CustomMenu from './components/menu';
 import { useEffect } from 'react';
+import { AppApi } from '@server/app';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
+    const router = useRouter();
 
     const {
         token: { colorBgContainer },
     } = theme.useToken();
+
+    useEffect(() => {
+        if (pathname !== '/login') {
+            AppApi.checkLogin()
+                .then(() => {
+                    router.replace('/user');
+                })
+                .catch(() => {
+                    router.replace('/login');
+                });
+        }
+    }, []);
 
     const renderElm = () => {
         if (pathname === '/' || pathname === '/login') {

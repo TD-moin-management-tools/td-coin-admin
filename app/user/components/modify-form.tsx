@@ -1,9 +1,10 @@
 import { Button, Form, Input } from 'antd';
 import { useEffect, useState } from 'react';
-import { IDataType } from '../config';
+import type { IUserListContent } from '@server/user/type';
+import { UserApi } from '@server/user';
 
 interface IModifyFormProps {
-    info: IDataType;
+    info: IUserListContent;
     onOk: () => void;
     onCancel: () => void;
 }
@@ -25,10 +26,26 @@ const ModifyForm = (props: IModifyFormProps) => {
 
     // TODO: 先用any了
     const onFinish = (value: any) => {
-        setLoading(true);
+        // 如果没有做修改，直接退出了
+        if (value.name === info.name) {
+            onCancel();
+            return;
+        }
 
-        setLoading(false);
-        onOk();
+        setLoading(true);
+        UserApi.updateUserInfo({
+            id: info.id,
+            name: value.name,
+        })
+            .then(res => {
+                onOk();
+            })
+            .catch(error => {
+                console.log('error', error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     // TODO: 先用any了

@@ -1,17 +1,13 @@
-import { FormOutlined } from '@ant-design/icons';
+import { Avatar, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import type { IUserListContent } from '@server/user/type';
 
-export interface IDataType {
-    key: string;
-    id: string;
-    name: string;
-    avatar: number;
-    address: string;
-}
+type TActionFunc = (record: IUserListContent) => void;
 
-type TActionFunc = (record: IDataType) => void;
-
-export const getColumns = (actionFunc: TActionFunc): ColumnsType<IDataType> => {
+export const getColumns = (
+    actionFunc: TActionFunc,
+    handleJumpUserDetail: TActionFunc
+): ColumnsType<IUserListContent> => {
     return [
         {
             title: 'id',
@@ -27,6 +23,12 @@ export const getColumns = (actionFunc: TActionFunc): ColumnsType<IDataType> => {
             title: '头像',
             dataIndex: 'avatar',
             key: 'avatar',
+            render: (avatar: string) => {
+                if (avatar.startsWith('http')) {
+                    return <Avatar size={64} src={avatar} />;
+                }
+                return avatar;
+            },
         },
         {
             title: '钱包地址',
@@ -39,11 +41,17 @@ export const getColumns = (actionFunc: TActionFunc): ColumnsType<IDataType> => {
             align: 'center',
             width: 80,
             render: (_, record) => (
-                <div
-                    className='px-2 cursor-pointer hover:text-[#1677ff]'
-                    onClick={() => actionFunc(record)}
-                >
-                    <FormOutlined />
+                <div className='flex'>
+                    <Button className='mr-2 px-2' type='primary' onClick={() => actionFunc(record)}>
+                        修改
+                    </Button>
+                    <Button
+                        className='px-2'
+                        type='primary'
+                        onClick={() => handleJumpUserDetail(record)}
+                    >
+                        查看详情
+                    </Button>
                 </div>
             ),
         },

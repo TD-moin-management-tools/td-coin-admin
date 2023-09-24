@@ -1,10 +1,10 @@
 import { Modal } from 'antd';
-import { IDataType } from '../config';
+import type { IUserListContent } from '@server/user/type';
 import ModifyForm from './modify-form';
 
 interface IInfoModifyModalProps {
     visible: boolean;
-    info?: IDataType;
+    info?: IUserListContent;
     onClose: (success: boolean) => void;
 }
 

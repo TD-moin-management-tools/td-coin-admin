@@ -13,6 +13,7 @@ export const getColumns = (
             title: 'id',
             dataIndex: 'id',
             key: 'id',
+            width: 70,
         },
         {
             title: '用户名',
@@ -23,9 +24,11 @@ export const getColumns = (
             title: '头像',
             dataIndex: 'avatar',
             key: 'avatar',
+            width: 100,
+            align: 'center',
             render: (avatar: string) => {
                 if (avatar.startsWith('http')) {
-                    return <Avatar size={64} src={avatar} />;
+                    return <Avatar size={96} src={avatar} />;
                 }
                 return avatar;
             },
@@ -34,6 +37,11 @@ export const getColumns = (
             title: '钱包地址',
             dataIndex: 'address',
             key: 'address',
+        },
+        {
+            title: 'TD coin',
+            dataIndex: 'coin',
+            key: 'coin',
         },
         {
             title: '操作',

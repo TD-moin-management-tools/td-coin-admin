@@ -1,4 +1,4 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { useEffect, useState } from 'react';
 import type { IUserListContent } from '@server/user/type';
 import { UserApi } from '@server/user';
@@ -41,6 +41,7 @@ const ModifyForm = (props: IModifyFormProps) => {
                 onOk();
             })
             .catch(error => {
+                message.error('更新失败，请稍后重试');
                 console.log('error', error);
             })
             .finally(() => {
